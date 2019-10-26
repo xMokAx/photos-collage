@@ -7,7 +7,9 @@ import {
   TouchableWithoutFeedback,
   Animated
 } from "react-native";
-import { Permissions, MediaLibrary, Camera } from "expo";
+import { Camera } from "expo-camera";
+import * as MediaLibrary from "expo-media-library";
+import * as Permissions from "expo-permissions";
 import { Ionicons } from "@expo/vector-icons";
 
 import Colors from "../constants/Colors";
@@ -34,11 +36,13 @@ export default class CameraScreen extends PureComponent {
   cameraButtonScale = new Animated.Value(1);
 
   async componentDidMount() {
+    isMounted = true;
     const { status } = await Permissions.askAsync(Permissions.CAMERA);
     this.setState({ hasCameraPermission: status === "granted" });
   }
 
   componentWillUnmount() {
+    isMounted = false;
     clearTimeout(this.timeout);
     clearTimeout(this.photoTimeout);
     clearTimeout(this.shotsTimeout);
@@ -144,9 +148,11 @@ export default class CameraScreen extends PureComponent {
                   if (photos.length === this.state.shotsNumber) {
                     this.props.screenProps.addPhotos(photos);
                   }
-                  this.setState(prevState => ({
-                    shotsTaken: prevState.shotsTaken + 1
-                  }));
+                  if (isMounted) {
+                    this.setState(prevState => ({
+                      shotsTaken: prevState.shotsTaken + 1
+                    }));
+                  }
                 }, 2500);
               } else {
                 this.setState(

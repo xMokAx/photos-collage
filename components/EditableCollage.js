@@ -10,12 +10,10 @@ import {
   PixelRatio
 } from "react-native";
 import { MaterialIcons, Ionicons } from "@expo/vector-icons";
-import {
-  GestureHandler,
-  takeSnapshotAsync,
-  MediaLibrary,
-  Constants
-} from "expo";
+import { captureRef as takeSnapshotAsync } from "react-native-view-shot";
+import Constants from "expo-constants";
+import * as MediaLibrary from "expo-media-library";
+import * as GestureHandler from "react-native-gesture-handler";
 const { State } = GestureHandler;
 import ProgressBar from "react-native-progress/Bar";
 
@@ -366,7 +364,7 @@ export default class EditableCollage extends PureComponent {
   };
 
   onImageMove = movingImageId => {
-    const prevMovingImage = this.state.movingImageId
+    const prevMovingImage = this.state.movingImageId;
     if (movingImageId === null && this.state.isReplacing) {
       this.setScreenParams({ title: "REPLACE" });
     } else if (movingImageId === null) {

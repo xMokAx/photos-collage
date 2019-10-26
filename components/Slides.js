@@ -13,10 +13,10 @@ import Layout from "../constants/Layout";
 import Colors from "../constants/Colors";
 import Button from "./Button";
 
-const {deviceHeight, deviceWidth} = Layout
-const indicatorWidth = indicatorCircleWidth * 5 + (indicatorSpace * 5 - 1);
+const { deviceHeight, deviceWidth } = Layout;
 const indicatorCircleWidth = 10;
 const indicatorSpace = 10;
+const indicatorWidth = indicatorCircleWidth * 5 + (indicatorSpace * 5 - 1);
 const imageWidth = deviceWidth / 3.6;
 const imageSpace = 4;
 const totalImagesWidth = imageWidth * 3 + imageSpace * 2;

@@ -1,6 +1,6 @@
 import React, { PureComponent } from "react";
 import { View, Animated, StyleSheet, Easing } from "react-native";
-import { GestureHandler } from "expo";
+import * as GestureHandler from 'react-native-gesture-handler';
 const {
   PanGestureHandler,
   PinchGestureHandler,

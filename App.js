@@ -8,15 +8,13 @@ import {
   Text,
   AsyncStorage
 } from "react-native";
-import {
-  AppLoading,
-  Asset,
-  Font,
-  Icon,
-  FaceDetector,
-  MediaLibrary,
-  Permissions
-} from "expo";
+import { AppLoading } from "expo";
+import * as Permissions from "expo-permissions";
+import * as MediaLibrary from "expo-media-library";
+import * as FaceDetector from "expo-face-detector";
+import * as Icon from "@expo/vector-icons";
+import * as Font from "expo-font";
+import { Asset } from "expo-asset";
 import { SafeAreaView } from "react-navigation";
 
 SafeAreaView.setStatusBarHeight(0);
@@ -108,9 +106,9 @@ export default class App extends Component {
             endCursor: r.endCursor
           }),
           () => {
-            // if (Platform.OS === "android") {
-            //   this.detectFaces(r.assets);
-            // }
+            if (Platform.OS === "android") {
+              this.detectFaces(r.assets);
+            }
           }
         );
       })
@@ -143,9 +141,12 @@ export default class App extends Component {
     }
   };
 
-  detectFaces = async photos => {
+  detectFaces = async (photos, newPhotos) => {
+    console.log("from detectFaces", newPhotos);
     for (const photo of photos) {
-      if (!this.state.facesPhotos.some(p => p.uri === photo.uri)) {
+      if (newPhotos) {
+        await this.detectPhotoFaces(photo, true);
+      } else if (!this.state.facesPhotos.some(p => p.uri === photo.uri)) {
         await this.detectPhotoFaces(photo);
       }
     }
@@ -239,9 +240,9 @@ export default class App extends Component {
       selectedPhotos: photos,
       recentsPhotos: [...photos, ...prevState.recentsPhotos]
     }));
-    // if (Platform.OS === "android") {
-    //   await this.detectFaces(photos);
-    // }
+    if (Platform.OS === "android") {
+      await this.detectFaces(photos, true);
+    }
   };
 
   render() {

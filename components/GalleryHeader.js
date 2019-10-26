@@ -1,6 +1,5 @@
 import React, { PureComponent } from "react";
 import {
-  Image,
   StyleSheet,
   View,
   ScrollView,
@@ -9,7 +8,7 @@ import {
   Animated,
   Platform
 } from "react-native";
-import { Header } from "react-navigation";
+import { Header } from "react-navigation-stack";
 
 import Colors from "../constants/Colors";
 import Layout from "../constants/Layout";

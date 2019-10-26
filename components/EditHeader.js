@@ -1,6 +1,6 @@
 import React, { PureComponent } from "react";
 import { StyleSheet, View } from "react-native";
-import { Header } from "react-navigation";
+import { Header } from "react-navigation-stack";
 
 import Colors from "../constants/Colors";
 import EditableCollage from "./EditableCollage";

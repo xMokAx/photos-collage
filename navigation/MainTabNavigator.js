@@ -1,8 +1,6 @@
 import React from "react";
-import {
-  createStackNavigator,
-  createMaterialTopTabNavigator
-} from "react-navigation";
+import { createMaterialTopTabNavigator } from "react-navigation-tabs";
+import { createStackNavigator } from "react-navigation-stack";
 import { Ionicons } from "@expo/vector-icons";
 
 import Colors from "../constants/Colors";
