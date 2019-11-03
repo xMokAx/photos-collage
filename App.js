@@ -235,10 +235,11 @@ export default class App extends Component {
   };
 
   addPhotos = async photos => {
+    const reversedPhotos = [...photos].reverse();
     await this.setState(prevState => ({
-      photos: [...photos, ...prevState.photos],
-      selectedPhotos: photos,
-      recentsPhotos: [...photos, ...prevState.recentsPhotos]
+      photos: [...reversedPhotos, ...prevState.photos],
+      selectedPhotos: reversedPhotos,
+      recentsPhotos: [...reversedPhotos, ...prevState.recentsPhotos]
     }));
     if (Platform.OS === "android") {
       await this.detectFaces(photos, true);
